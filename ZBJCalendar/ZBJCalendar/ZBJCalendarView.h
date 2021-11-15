@@ -156,6 +156,10 @@ typedef CF_ENUM(NSInteger, ZBJCalendarViewHeadStyle) {
  */
 - (void)reloadItemsAtMonths:(NSSet<NSDate *> *)months;
 
+/// scroll to special Month
+/// @param month special month
+- (void)scrollToMonth:(NSDate *)month ;
+
 /**
  *  Set content offset of calendar view
  *

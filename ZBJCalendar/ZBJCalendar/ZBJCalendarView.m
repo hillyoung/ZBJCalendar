@@ -164,6 +164,17 @@
     [self.collectionView reloadSections:indexSet];
 }
 
+- (void)scrollToMonth:(NSDate *)month {
+    [self layoutIfNeeded];   // avoid scroll invalid
+    NSIndexPath *indexPath = [NSDate indexPathAtDate:month firstDate:self.firstDate];
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:indexPath.section] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+    CGPoint contentOffset = self.collectionView.contentOffset;
+    CGSize headerSize = [self collectionView:self.collectionView layout:self.collectionView.collectionViewLayout referenceSizeForHeaderInSection:indexPath.section];
+    contentOffset.y -= headerSize.height + self.contentInsets.top;
+    contentOffset.x += self.contentInsets.left;
+    [self setContentOffset:contentOffset animated:YES];
+}
+
 - (void)setContentOffset:(CGPoint)contentOffset {
     _contentOffset = contentOffset;
     CGPoint origin = CGPointMake(_contentOffset.x - self.contentInsets.left, _contentOffset.y - self.contentInsets.top);

@@ -32,6 +32,7 @@ typedef CF_ENUM(NSInteger, ZBJCalendarSelectedState) {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Current Month" style:UIBarButtonItemStyleDone target:self action:@selector(rightItemAction)];
     
     NSDate *firstDate = [NSDate date];
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -42,10 +43,14 @@ typedef CF_ENUM(NSInteger, ZBJCalendarSelectedState) {
     
     self.calendarView.delegate = self;
     self.calendarView.dataSource = self;
-    self.calendarView.firstDate = firstDate;
+    self.calendarView.firstDate = [NSDate dateWithTimeIntervalSince1970:0];
     self.calendarView.lastDate = lastDate;
-
     [self.view addSubview:self.calendarView];
+    [self rightItemAction];
+}
+
+- (void)rightItemAction {
+    [self.calendarView scrollToMonth:[NSDate date]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -181,7 +186,7 @@ typedef CF_ENUM(NSInteger, ZBJCalendarSelectedState) {
 #pragma mark -
 - (ZBJCalendarView *)calendarView {
     if (!_calendarView) {
-        _calendarView = [[ZBJCalendarView alloc] initWithFrame:CGRectMake(0, 64, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 64)];
+        _calendarView = [[ZBJCalendarView alloc] initWithFrame:CGRectMake(0, 44 + [UIApplication sharedApplication].keyWindow.safeAreaInsets.top, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 64)];
         [_calendarView registerCellClass:[ZBJSimpleRangeSelectionCell class] withReuseIdentifier:@"cell"];
         [_calendarView registerSectionHeader:[ZBJCalendarSectionHeader class] withReuseIdentifier:@"sectionHeader"];
         [_calendarView registerSectionFooter:[ZBJCalendarSectionFooter class] withReuseIdentifier:@"sectionFooter"];
