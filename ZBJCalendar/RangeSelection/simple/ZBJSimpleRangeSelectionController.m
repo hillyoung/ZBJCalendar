@@ -39,7 +39,7 @@ typedef CF_ENUM(NSInteger, ZBJCalendarSelectedState) {
     [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
     NSDateComponents *components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:firstDate];
     components.month = components.month + 6; //
-    NSDate *lastDate = [calendar dateFromComponents:components];
+    NSDate *lastDate = [NSDate distantFuture];
     
     self.calendarView.delegate = self;
     self.calendarView.dataSource = self;

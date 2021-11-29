@@ -167,11 +167,10 @@
 - (void)scrollToMonth:(NSDate *)month {
     [self layoutIfNeeded];   // avoid scroll invalid
     NSIndexPath *indexPath = [NSDate indexPathAtDate:month firstDate:self.firstDate];
-    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:indexPath.section] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
-    CGPoint contentOffset = self.collectionView.contentOffset;
+    UICollectionViewLayoutAttributes *attributes = [self.collectionView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:indexPath.section]];
+    CGPoint contentOffset = CGPointMake(0, CGRectGetMinY(attributes.frame));
     CGSize headerSize = [self collectionView:self.collectionView layout:self.collectionView.collectionViewLayout referenceSizeForHeaderInSection:indexPath.section];
-    contentOffset.y -= headerSize.height + self.contentInsets.top;
-    contentOffset.x += self.contentInsets.left;
+    contentOffset.y -= headerSize.height;
     [self setContentOffset:contentOffset animated:YES];
 }
 
@@ -241,7 +240,7 @@
         return footerView;
     }
    
-    return NULL;
+    return [UICollectionReusableView new];
 }
 
 
