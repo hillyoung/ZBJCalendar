@@ -171,6 +171,7 @@
     CGPoint contentOffset = CGPointMake(0, CGRectGetMinY(attributes.frame));
     CGSize headerSize = [self collectionView:self.collectionView layout:self.collectionView.collectionViewLayout referenceSizeForHeaderInSection:indexPath.section];
     contentOffset.y -= headerSize.height;
+    contentOffset.y = MIN(self.contentSize.height - CGRectGetHeight(self.collectionView.bounds), contentOffset.y);
     [self setContentOffset:contentOffset animated:YES];
 }
 
