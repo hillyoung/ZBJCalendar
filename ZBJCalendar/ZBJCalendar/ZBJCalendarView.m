@@ -79,7 +79,11 @@
     if (self.cellScale > 0) {
         layout.itemSize = CGSizeMake(cellWidth, (int)(cellWidth * self.cellScale));
     } else {
-        layout.itemSize = CGSizeMake(cellWidth, cellWidth);
+        if([self.dataSource respondsToSelector:@selector(heightForItemSizeIncalendarView:)]) {
+            layout.itemSize = CGSizeMake(cellWidth, [self.dataSource heightForItemSizeIncalendarView:self]);
+        } else {
+            layout.itemSize = CGSizeMake(cellWidth, cellWidth);
+        }
     }
 
     self.collectionView.collectionViewLayout = layout;

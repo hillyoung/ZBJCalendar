@@ -188,6 +188,12 @@ typedef CF_ENUM(NSInteger, ZBJCalendarViewHeadStyle) {
 
 @optional
 /**
+ *  This method is used for appoint height with current `date`.
+ *
+ *  @param calendarView  self
+ */
+- (CGFloat)heightForItemSizeIncalendarView:(ZBJCalendarView *)calendarView;
+/**
  *  If you registe a section header or footer, you should configure them by them two methods, calendar will provide current `year` and `month` for you.
  *
  *  @param calendarView self

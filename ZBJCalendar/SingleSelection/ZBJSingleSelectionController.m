@@ -61,7 +61,12 @@
 }
 
 
-#pragma mark - ZBJCalendarDataSource
+#pragma mark - ZBJCalendarDataSource\
+
+- (CGFloat)heightForItemSizeIncalendarView:(ZBJCalendarView *)calendarView {
+    return 100;
+}
+
 - (void)calendarView:(ZBJCalendarView *)calendarView configureCell:(ZBJSingleSelectionCell *)cell forDate:(NSDate *)date {
     
     cell.date = date;
@@ -113,7 +118,7 @@
         _calendarView.delegate = self;
         _calendarView.backgroundColor = [UIColor whiteColor];
         _calendarView.contentInsets = UIEdgeInsetsMake(0, 14, 0, 14);
-        _calendarView.cellScale = 140.0 / 100.0;
+//        _calendarView.cellScale = 140.0 / 100.0;
         _calendarView.sectionHeaderHeight = 27;
         _calendarView.weekViewHeight = 20;
         _calendarView.weekView.backgroundColor = [UIColor colorWithRed:249.0f/255.0f green:249.0f/255.0f blue:249.0f/255.0f alpha:1.0];
